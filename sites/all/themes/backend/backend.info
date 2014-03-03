@@ -1,0 +1,11 @@
+name = Seven Sub-theme
+description = A sub-theme of the Drupal core theme Seven.
+base theme = seven
+version = 1.0
+core = 7.x
+screenshot  = screenshot.png
+
+stylesheets[all][] = backend.css
+stylesheets[all][] = share.css
+
+scripts[] = backend.js
