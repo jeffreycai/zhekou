@@ -1,0 +1,193 @@
+<?php
+
+/**
+ * Implements hook_schema
+ */
+function zhekou_groupon_schema () {
+  $schema['_groupon_deal'] = array(
+    'fields' => array(
+
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => true,
+        'not null' => true
+      ),
+      
+      'rid' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ),
+
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true
+      ),
+
+      'dealUrl' => array(
+        'type' => 'varchar',
+        'length' => 511,
+        'not null' => true,
+      ),
+
+      'startAt' => array(
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+
+      'endAt' => array(
+        'type' => 'varchar',
+        'length' => 30,
+      ),
+
+      'smallImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'mediumImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'largeImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'sidebarImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'grid4ImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'grid6ImageUrl' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'pitchHtml' => array(
+        'type' => 'text',
+      ),
+
+      'shortAnnouncementTitle' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'announcementTitle' => array(
+        'type' => 'varchar',
+        'length' => 255,
+      ),
+
+      'newsletterTitle' => array(
+        'type' => 'varchar',
+        'length' => 127,
+      ),
+
+      'discountPercent' => array(
+        'type' => 'varchar',
+        'length' => 3,
+      ),
+
+      'isSoldOut' => array(
+        'type' => 'int',
+        'not null' => true,
+        'default' => 0,
+        'length' => 1,
+      ),
+
+      'discount' => array(
+        'type' => 'int',
+      ),
+
+      'price' => array(
+        'type' => 'int',
+      ),
+
+      'value' => array(
+        'type' => 'int',
+      ),
+
+      'discountPercent' => array(
+        'type' => 'text',
+      ),
+
+      'finePrint' => array(
+        'type' => 'text',
+      ),
+
+      
+      'crawed' => array(
+        'type' => 'int',
+        'not null' => true,
+        'default' => 0,
+        'length' => 1,
+      ),
+        
+      'crawed_queued' => array(
+        'type' => 'int',
+        'not null' => true,
+        'default' => 0,
+        'length' => 1,
+      ),
+        
+      'imported' => array(
+        'type' => 'int',
+        'not null' => true,
+        'default' => 0,
+        'length' => 1
+      ),
+        
+      'imported_queued'=> array(
+        'type' => 'int',
+        'not null' => true,
+        'default' => 0,
+        'length' => 1,
+      ),
+    ),
+    'indexes' => array(
+      'rid' => array('rid'),
+      'crawed' => array('crawed'),
+      'crawed_queued' => array('crawed_queued'),
+      'imported' => array('imported'),
+      'imported_queued' => array('imported_queued'),
+    ),
+    'unique keys' => array(
+      'id' => array('id'),
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
+}
+
+/**
+ * Implements hook_uninstall()
+ */
+function zhekou_groupon_uninstall() {
+  // drop "_groupon_deal" table
+  db_query('DROP TABLE {_groupon_deal}');
+  
+  // remove vocabulary and its terms
+  /*
+  $vocabularies = taxonomy_get_vocabularies();
+  $vid;
+  foreach ($vocabularies as $v) {
+    if ($v->machine_name == 'location') {
+      $vid = $v->vid;
+      break;
+    }
+  }
+  if ($vid) {
+    taxonomy_vocabulary_delete($vid);
+  }
+   */
+}
+
+

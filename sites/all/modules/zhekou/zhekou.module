@@ -1,0 +1,26 @@
+<?php
+
+/**
+* Implements hook_help().
+*/
+function zhekou_help($path, $arg) {
+  if ($path == 'admin/help#zhekou') {
+    return t('All functions for site zhekou');
+  }
+}
+
+/**
+ * Implements hook_init()
+ */
+function zhekou_init() {
+  module_load_include('inc', 'zhekou', 'includes/Utility.class');
+  
+  // init $util
+  global $util;
+  
+  if (!isset($util)) {
+    $util = Utility::getInstance();
+  }
+  $util->loadSettings('zhekou');
+  
+}

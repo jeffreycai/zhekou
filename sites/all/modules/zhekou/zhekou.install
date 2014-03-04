@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function zhekou_install() {
+  // check if vocabulary 'location' exists, if no, create it and terms
+  $vs = taxonomy_get_vocabularies();
+  $exists = false;
+  foreach ($vs as $v) {
+    if ($v->machine_name == 'location') {
+      $exists = true;
+    }
+  }
+  
+  if ($exists == false) {
+    // create a vocabulary to hold suburbs
+    $vocabulary = new stdClass();
+    $vocabulary->name = 'Location';
+    $vocabulary->machine_name = 'location';
+    taxonomy_vocabulary_save($vocabulary);
+    $vid = $vocabulary->vid;
+
+    // create suburb terms
+    module_load_include('inc', 'zhekou', 'includes/Utility.class');
+    global $util;
+    if (!isset($util)) {
+      $util = Utility::getInstance();
+    }
+    $util->loadSettings('zhekou');
+
+    foreach ($util->getSetting('zhekou->locations') as $location) {
+      $term = new stdClass();
+      $term->name = $location;
+      $term->vid = $vid;
+      taxonomy_term_save($term);
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall()
+ */
+function zhekou_uninstall() {
+  // remove vocabulary and its terms
+  /*
+  $vocabularies = taxonomy_get_vocabularies();
+  $vid;
+  foreach ($vocabularies as $v) {
+    if ($v->machine_name == 'location') {
+      $vid = $v->vid;
+      break;
+    }
+  }
+  if ($vid) {
+    taxonomy_vocabulary_delete($vid);
+  }
+   */
+}
