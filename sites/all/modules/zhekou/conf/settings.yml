@@ -1,5 +1,5 @@
 zhekou:
-  locations:
+  location:
     - Adelaide
     - Brisbane
     - Canberra
@@ -9,3 +9,8 @@ zhekou:
     - Perth
     - Sydney
     - Wollongong
+  category:
+    - Food
+    - Event
+    - Travel
+    - Goods
