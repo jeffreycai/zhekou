@@ -1,5 +1,6 @@
 zhekou:
   location:
+    - Australia
     - Adelaide
     - Brisbane
     - Canberra
@@ -14,3 +15,6 @@ zhekou:
     - Event
     - Travel
     - Goods
+  vendor:
+    - Groupon
+    - Other

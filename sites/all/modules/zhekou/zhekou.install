@@ -9,6 +9,7 @@ function zhekou_install() {
   
   _create_taxononmy('location', 'Location', 'zhekou');
   _create_taxononmy('category', 'Category', 'zhekou');
+  _create_taxononmy('vendor', 'Vendor', 'zhekou');
 }
 
 /**
