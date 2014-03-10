@@ -1,4 +1,5 @@
 zhekou:
+  
   location:
     - Australia
     - Adelaide
@@ -10,11 +11,13 @@ zhekou:
     - Perth
     - Sydney
     - Wollongong
+    
   category:
     - Food
     - Event
     - Travel
     - Goods
+    
   vendor:
     - Groupon
     - Other

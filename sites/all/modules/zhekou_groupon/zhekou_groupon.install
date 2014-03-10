@@ -70,6 +70,10 @@ function zhekou_groupon_schema () {
         'type' => 'varchar',
         'length' => 127,
       ),
+        
+      'highlightsHtml' => array(
+        'type' => 'text',
+      ),
 
       'pitchHtml' => array(
         'type' => 'text',
