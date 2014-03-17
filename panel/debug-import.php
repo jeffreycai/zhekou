@@ -15,6 +15,7 @@ $item = array(
   'rid' => '12345',
   'title' => 'Best deal in town and you dont want to miss',
   'dealUrl' => 'http://www.google.com',
+  'location' => 'Sydney',
   'startAt' => '2014-03-13T16:30:00',
   'endAt' => '2014-03-13T16:30:00',
   'smallImageUrl' => 'http://www.google.com',
@@ -23,7 +24,9 @@ $item = array(
   'sidebarImageUrl' => 'http://www.google.com',
   'grid4ImageUrl' => 'http://www.google.com',
   'grid6ImageUrl' => 'http://www.google.com',
+  'highlightsHtml' => '<p>This is the Highlight</p>',
   'pitchHtml' => '<p>This is the pitch</p>',
+  'description' => '<p>I am dscription</p>',
   'shortAnnouncementTitle' => 'Best deal in town',
   'announcementTitle' => 'Best deal in town',
   'newsletterTitle' => 'Best deal in town',
@@ -35,55 +38,48 @@ $item = array(
   'finePrint' => "<h3>Fine print</h3><p>This is the fine print and you should know</p>",
 );
 
-$ennode = new stdClass();
+// create both en and zh-hans node
+$nodes = array();
+foreach (array('en', 'zh-hans') as $lang) {
+  $node = new stdClass();
+  $node->title = $item['title'];
+  $node->type = 'groupon_deals';
+  node_object_prepare($node);
+  $node->language = $lang;
+  $node->uid = 1;
+  $node->status = 1; // published or not
+  //$ennode->promote = 0;
+  //$ennode->comment = 0;
+  $node->field_short_title = $item['newsletterTitle'];
+  $node->field_highlight['und'][0]['value'] = $item['highlightsHtml'];
+  $node->field_highlight['und'][0]['format'] = 'full_html';
+  $node->field_fine_print['und'][0]['value'] = $item['finePrint'];
+  $node->field_fine_print['und'][0]['format'] = 'full_html';
+  $node->field_description['und'][0]['value'] = $item['description'];
+  $node->field_description['und'][0]['format'] = 'full_html';
+  $node->field_pitch['und'][0]['value'] = $item['pitchHtml'];
+  $node->field_pitch['und'][0]['format'] = 'full_html';
+  $node->field_price['und'][0]['value'] = $item['price'];
+  $node->field_discount['und'][0]['value'] = $item['discount'];
+  $node->field_deal_url['und'][0]['value'] = $item['dealUrl'];
+  $node->field_deal_ends_at['und'][0]['value'] = $item['endAt'];
+  $node->field_featured_image['und'][0]['value'] = $item['largeImageUrl'];
+  $node->field_value['und'][0]['value'] = $item['value'];
+  if ($terms = taxonomy_get_term_by_name($item['location'], 'location')) {
+    $term = array_pop($terms);
+    $node->field_location['und'][0]['tid'] = $term->tid;
+  }
+  if ($terms = taxonomy_get_term_by_name('Groupon', 'vendor')) {
+    $term = array_pop($terms);
+    $node->field_location['und'][0]['tid'] = $term->tid;
+  }
+  node_save($node);
+  $nodes[$lang] = $node;
+}
 
-$ennode->title = 'Test node';
-$ennode->type = 'groupon_deals';
-node_object_prepare($ennode);
-$ennode->language = 'en';
-$ennode->uid = $user->uid;
-$ennode->status = 1; // published or not
-//$ennode->promote = 0;
-//$ennode->comment = 0;
+$nodes['en']->tnid = $nodes['en']->nid;
+$nodes['zh-hans']->tnid = $nodes['en']->nid;
+$nodes['zh-hans']->status = 0;
 
-$ennode->body['und'][0]['value'] = "<p>hello world</p> <pre>stuff <code></pre>";
-$ennode->body['und'][0]['format'] = 'full_html';
-
-$terms = taxonomy_get_term_by_name('Gold Coast', 'location');
-$term = array_pop($terms);
-$ennode->field_location['und'][]['tid'] = $term->tid;
-
-$ennode->field_pitch['und'][0]['value'] = "<p>hello world</p> <pre>stuff <code></pre>";
-$ennode->field_pitch['und'][0]['format'] = 'full_html';
-          
-node_save($ennode);
-
-
-
-
-$zhnode = new stdClass();
-
-$zhnode->title = '测试节点';
-$zhnode->type = 'groupon_deals';
-node_object_prepare($zhnode);
-$zhnode->language = 'zh-hans';
-$zhnode->uid = $user->uid;
-$zhnode->status = 1; // published or not
-//$zhnode->promote = 0;
-//$zhnode->comment = 0;
-
-$zhnode->body['und'][0]['value'] = "<p>测试节点</p> <pre>测试节点</pre>";
-$zhnode->body['und'][0]['format'] = 'full_html';
-
-$terms = taxonomy_get_term_by_name('Gold Coast', 'location');
-$term = array_pop($terms);
-$zhnode->field_location['und'][]['tid'] = $term->tid;
-
-$zhnode->field_pitch['und'][0]['value'] = "<p>测试节点</p> <pre>测试节点</pre>";
-$zhnode->field_pitch['und'][0]['format'] = 'full_html';
-
-$zhnode->tnid = $ennode->nid;          
-node_save($zhnode);
-
-$ennode->tnid = $ennode->nid;
-node_save($ennode);
+node_save($nodes['en']);
+node_save($nodes['zh-hans']);

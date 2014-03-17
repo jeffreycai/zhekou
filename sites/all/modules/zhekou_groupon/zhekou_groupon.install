@@ -24,6 +24,12 @@ function zhekou_groupon_schema () {
         'length' => 255,
         'not null' => true
       ),
+      
+      'location' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => true
+      ),
 
       'dealUrl' => array(
         'type' => 'varchar',
@@ -77,6 +83,10 @@ function zhekou_groupon_schema () {
 
       'pitchHtml' => array(
         'type' => 'text',
+      ),
+        
+      'description' => array(
+        'type' => 'text'
       ),
 
       'shortAnnouncementTitle' => array(

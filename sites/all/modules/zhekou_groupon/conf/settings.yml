@@ -1,0 +1,27 @@
+zhekou_groupon:
+  
+  feeds:
+    Adelaide:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214390_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=adelaide
+      location: Adelaide
+    Best of Brisbane:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214391_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=brisbane-premium
+      location: Brisbane
+    Best of Melbourne:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214392_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=melbourne-premium
+      location: Melbourne
+    Best of Perth:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214393_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=perth-premium
+      location: Perth
+    Best of Sydney:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_213399_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=sydney-premium
+      location: Sydney
+    Brisbane:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214394_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=brisbane
+      location: Brisbane
+    Canberra:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214395_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=canberra
+      location: Canberra
+    Cellar:
+      url: https://partner-int-api.groupon.com/deals.json?country_code=AU&tsToken=AU_AFF_0_200615_214397_0&CID=AU_AFF_5600_225_5383_1&nlp&utm_source=GPN&utm_medium=afl&utm_campaign=200615&division_id=cellar
+      category: food
